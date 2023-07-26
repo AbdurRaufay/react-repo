@@ -1,0 +1,32 @@
+overwrite: true
+schema: "https://light-puce-pea-coat.cyclic.app/graphql"
+documents:
+  - "queries/gql-strings/queries/*.gql"
+  - "queries/gql-strings/mutations/*.gql"
+  - "queries/gql-strings/fragments/*.gql"
+  - "queries/gql-strings/subscriptions/*.gql"
+generates:
+  queries/generated/index.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+      - add:
+          content: "import { API_URL, fetchParams } from '../../config/index'"
+    config:
+      fetcher:
+        endpoint: "API_URL"
+        fetchParams: fetchParams()
+
+  queries/generated/index.d.ts:
+    plugins:
+      - "typescript-graphql-files-modules"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
+config:
+  namingConvention:
+    enumValues: change-case-all#pascalCase
+    transformUnderscore: true
+
+

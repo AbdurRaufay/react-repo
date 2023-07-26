@@ -1,0 +1,10 @@
+query CartItems($userId: ID!) {
+  cartItems(userId: $userId) {
+    id
+    productId
+    quantity
+    userId
+    title
+    price
+  }
+}

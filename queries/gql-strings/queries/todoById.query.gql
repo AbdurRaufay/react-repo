@@ -1,0 +1,8 @@
+query Todo($todoId: ID!) {
+  todo(todoId: $todoId) {
+    id
+    title
+    price
+    description
+  }
+}

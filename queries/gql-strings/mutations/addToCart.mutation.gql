@@ -1,0 +1,10 @@
+mutation AddToCart($productId: ID!, $quantity: Int!) {
+  addToCart(productId: $productId, quantity: $quantity) {
+    id
+    productId
+    quantity
+    userId
+    title
+    price
+  }
+}

@@ -1,0 +1,10 @@
+query Users {
+  users {
+    _id
+    firstName
+    lastName
+    email
+    password
+    role
+  }
+}

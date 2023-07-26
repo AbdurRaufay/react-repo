@@ -1,0 +1,9 @@
+mutation CreateTodo($addElement: TodoCreate) {
+  createTodo(addElement: $addElement) {
+    id
+    title
+    price
+    description
+    imageUrl
+  }
+}

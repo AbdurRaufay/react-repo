@@ -1,0 +1,10 @@
+query User($userId: ID!) {
+  user(userId: $userId) {
+    _id
+    firstName
+    lastName
+    email
+    password
+    role
+  }
+}
