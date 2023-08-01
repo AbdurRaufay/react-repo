@@ -72,7 +72,7 @@ const LoginInput = () => {
           const accessToken = event.data.accessToken;
           console.log(accessToken, "ACCESSTOKEN");
           try {
-            const response = await loginMutate(accessToken);
+            const response = await loginMutate({accessToken});
             const token = response?.data?.loginUserWithGoogle?.token;
             const userId = response?.data?.loginUserWithGoogle?.userId;
             console.log(userId, "user");
@@ -84,9 +84,7 @@ const LoginInput = () => {
           } catch (error) {
             console.log(error);
           }
-          // Post message back to parent window
           window.opener.postMessage({ accessToken: event.data.accessToken }, '*');
-          // Close the popup window after sending the message
           googleAuthWindow.close();
         }
       });
