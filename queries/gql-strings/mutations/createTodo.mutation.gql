@@ -4,6 +4,5 @@ mutation CreateTodo($addElement: TodoCreate) {
     title
     price
     description
-    imageUrl
   }
 }
