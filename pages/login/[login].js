@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useLoginUserMutation, useLoginUserWithGoogleMutation } from "../../queries/generated";
 import { useRouter } from "next/router";
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 const generateGoogleAuthUrl = () => {
+  const clientid=process.env.client-Id
   return (
     "https://accounts.google.com/o/oauth2/v2/auth" +
-    "?client_id=670797767305-idd2c6ja8v8qcko6ke46r3qjtbcoo09u.apps.googleusercontent.com" +
+    "?client_id="+ clientid+
     "&redirect_uri=https://dark-zipper-deer.cyclic.cloud/auth/google/callback" +
     "&response_type=code" +
     "&scope=https://www.googleapis.com/auth/userinfo.email" +
