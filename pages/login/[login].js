@@ -69,7 +69,7 @@ const LoginInput = () => {
           const accessToken = event.data.accessToken;
         console.log(accessToken,"ACCESSTOKEN")
           try {
-            const response = await loginMutate({accessToken});
+            const response = await loginMutate(accessToken);
             const token = response?.data?.loginUserWithGoogle?.token;
             const userId = response?.data?.loginUserWithGoogle?.userId;
             console.log(userId,"user")
