@@ -10,33 +10,33 @@ const LoginInput = () => {
     password: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await mutateAsync(formData);
-      const token= response?.loginUser.token;
-      const userId=response?.loginUser.userId
-      if (token && userId) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("userId",userId)
-        router.push("/")
-      }
-      setFormData({
-        email: "",
-        password: "",
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSubmitForm = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await mutateAsync(formData);
+  //     const token= response?.loginUser.token;
+  //     const userId=response?.loginUser.userId
+  //     if (token && userId) {
+  //       localStorage.setItem("token", token);
+  //       localStorage.setItem("userId",userId)
+  //       router.push("/")
+  //     }
+  //     setFormData({
+  //       email: "",
+  //       password: "",
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const handleGoogleLoginSuccess = async (response) => {
     try {
       // Send the Google ID token to your backend for verification and user creation/login
@@ -91,7 +91,7 @@ const LoginInput = () => {
   // };
   return (
     <div>
-      <form onSubmit={handleSubmitForm}>
+      {/* <form onSubmit={handleSubmitForm}>
         <label className="block mb-2">Email</label>
         <input
           type="email"
@@ -118,7 +118,7 @@ const LoginInput = () => {
           />
         </div>
       
-      </form>
+      </form> */}
       {/* <button
           onClick={handleSignInWithGoogle}
           className="bg-blue-600 px-8 py-2 mt-4 cursor-pointer"
