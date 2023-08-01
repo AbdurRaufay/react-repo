@@ -8,7 +8,7 @@ const generateGoogleAuthUrl = () => {
   const clientid=process.env.clientId
   return (
     "https://accounts.google.com/o/oauth2/v2/auth" +
-    "?client_id="+ clientid+
+    "?client_id=670797767305-idd2c6ja8v8qcko6ke46r3qjtbcoo09u.apps.googleusercontent.com"+
     "&redirect_uri=https://dark-zipper-deer.cyclic.cloud/auth/google/callback" +
     "&response_type=code" +
     "&scope=https://www.googleapis.com/auth/userinfo.email" +
@@ -73,6 +73,7 @@ const LoginInput = () => {
           console.log(accessToken, "ACCESSTOKEN");
           try {
             const response = await loginMutate({accessToken});
+            console.log(response,"res")
             const token = response?.data?.loginUserWithGoogle?.token;
             const userId = response?.data?.loginUserWithGoogle?.userId;
             console.log(userId, "user");
