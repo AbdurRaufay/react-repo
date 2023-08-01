@@ -38,26 +38,31 @@ const LoginInput = () => {
   };
   
   const handleSignInWithGoogle = async () => {
-    try {
+
       // Call the backend server endpoint for Google Sign-In
       // const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
-      const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
-        method: "GET",
-        mode: "cors",
-        credentials: "include",
-      });
-        console.log(response.url,"clg")
-      if (response.ok) {
+      // const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
+      //   method: "GET",
+      //   mode: "cors",
+      //   credentials: "include",
+      // });
+      //   console.log(response.url,"clg")
+      // if (response.ok) {
         // Redirect to the Google Sign-In page
-        window.location.href = response.url;
-        console.log(response,"res")
-      } else {
-        console.log("Error occurred during Google Sign-In");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+   try{
+        window.location.href ="https://prismatic-sunshine-ec4f13.netlify.app/auth/google";
+    //     console.log(response,"res")
+    //   } else {
+    //     console.log("Error occurred during Google Sign-In");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+   }catch(err){
+    console.log(err)
+   }
+  }
   return (
     <div>
       <form onSubmit={handleSubmitForm}>
