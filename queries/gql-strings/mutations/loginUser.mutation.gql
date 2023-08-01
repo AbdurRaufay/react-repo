@@ -1,5 +1,5 @@
-mutation LoginUser($email: String, $password: String) {
-  loginUser(email: $email, password: $password) {
+mutation LoginUser($email: String, $password: String, $googleAuthCode: String) {
+  loginUser(email: $email, password: $password, googleAuthCode: $googleAuthCode) {
     userId
     token
     message
