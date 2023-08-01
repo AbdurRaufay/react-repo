@@ -1,0 +1,7 @@
+mutation LoginUserWithGoogle($googleAuthCode: String!) {
+  loginUserWithGoogle(googleAuthCode: $googleAuthCode) {
+    userId
+    token
+    message
+  }
+}
