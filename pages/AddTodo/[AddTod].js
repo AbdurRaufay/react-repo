@@ -24,7 +24,7 @@ const AddTodo = () => {
     title: '',
     price: '',
     description: '',
-    image: null
+    // image: null
   });
  
 
@@ -36,15 +36,15 @@ const AddTodo = () => {
     console.log(todo, "dddd")
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setTodo((prevTodo) => ({
-        ...prevTodo,
-        image: file, // Store the File object directly
-      }));
-    }
-  };
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setTodo((prevTodo) => ({
+  //       ...prevTodo,
+  //       image: file, // Store the File object directly
+  //     }));
+  //   }
+  // };
   
   
   // ... other functions ...
@@ -62,10 +62,10 @@ const AddTodo = () => {
         description: todo.description,
       };
   
-      if (todo.image) {
-        const base64Image = await convertImageToBase64(todo.image);
-        newTodo.image = base64Image;
-      }
+      // if (todo.image) {
+      //   const base64Image = await convertImageToBase64(todo.image);
+      //   newTodo.image = base64Image;
+      // }
   
       await mutateAsync({ addElement: newTodo });
   
@@ -73,7 +73,7 @@ const AddTodo = () => {
         title: "",
         price: "",
         description: "",
-        image: null, 
+        // image: null, 
       });
     } catch (error) {
       console.log(error);
@@ -81,20 +81,20 @@ const AddTodo = () => {
   };
   
   // Function to convert image file to base64 string
-  const convertImageToBase64 = (imageFile) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+  // const convertImageToBase64 = (imageFile) => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
   
-      reader.onloadend = () => {
-        const base64String = reader.result.split(',')[1];
-        resolve(base64String);
-      };
+  //     reader.onloadend = () => {
+  //       const base64String = reader.result.split(',')[1];
+  //       resolve(base64String);
+  //     };
   
-      reader.onerror = (error) => reject(error);
+  //     reader.onerror = (error) => reject(error);
   
-      reader.readAsDataURL(imageFile);
-    });
-  };
+  //     reader.readAsDataURL(imageFile);
+  //   });
+  // };
 
   
 
@@ -129,14 +129,14 @@ const AddTodo = () => {
           onChange={handleChange}
           className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <label className="block mb-2">Image</label>
+        {/* <label className="block mb-2">Image</label>
         <input
           type="file"
           name="image"
           required
           onChange={handleImageChange}
           className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        /> */}
         <div>
           <input
             type="submit"

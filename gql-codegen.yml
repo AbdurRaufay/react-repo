@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://light-puce-pea-coat.cyclic.app/graphql"
+schema: "https://dark-zipper-deer.cyclic.cloud/graphql"
 documents:
   - "queries/gql-strings/queries/*.gql"
   - "queries/gql-strings/mutations/*.gql"
