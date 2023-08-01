@@ -41,7 +41,7 @@ const LoginInput = () => {
     try {
       // Call the backend server endpoint for Google Sign-In
       // const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
-      const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
+      const response = await fetch("https://dark-zipper-deer.cyclic.cloud/auth/google/callback", {
         method: "GET",
         mode: "cors",
         credentials: "include",
