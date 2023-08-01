@@ -1,4 +1,4 @@
-export const API_URL = "https://dark-zipper-deer.cyclic.cloud/graphql";
+export const API_URL = "https://dark-zipper-deer.cyclic.cloud";
 
 export const fetchParams = () => {
   let token = "";
