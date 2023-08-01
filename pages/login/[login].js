@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const generateGoogleAuthUrl = () => {
-  const clientid=process.env.client-Id
+  const clientid=process.env.clientId
   return (
     "https://accounts.google.com/o/oauth2/v2/auth" +
     "?client_id="+ clientid+
