@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLoginUserMutation } from "../../queries/generated";
-import { GoogleLogin } from "react-google-login";
 import { useRouter } from "next/router";
 const LoginInput = () => {
     const router=useRouter()
@@ -10,78 +9,54 @@ const LoginInput = () => {
     password: "",
   });
 
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   
-  // const handleSubmitForm = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await mutateAsync(formData);
-  //     const token= response?.loginUser.token;
-  //     const userId=response?.loginUser.userId
-  //     if (token && userId) {
-  //       localStorage.setItem("token", token);
-  //       localStorage.setItem("userId",userId)
-  //       router.push("/")
-  //     }
-  //     setFormData({
-  //       email: "",
-  //       password: "",
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  const handleGoogleLoginSuccess = async (response) => {
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
     try {
-      // Send the Google ID token to your backend for verification and user creation/login
-      const idToken = response?.tokenId; // Get the Google ID token from the response
-      const response = await fetch("https://dark-zipper-deer.cyclic.cloud/auth/google/callbackL", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ idToken }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        const userId = data.userId;
-        if (token && userId) {
-          localStorage.setItem("token", token);
-          localStorage.setItem("userId", userId);
-          router.push("/");
-        }
-      } else {
-        console.log("Error occurred during Google Sign-In");
+      const response = await mutateAsync(formData);
+      const token= response?.loginUser.token;
+      const userId=response?.loginUser.userId
+      if (token && userId) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId",userId)
+        router.push("/")
       }
+      setFormData({
+        email: "",
+        password: "",
+      });
     } catch (error) {
       console.log(error);
     }
   };
-  const handleGoogleLoginFailure = (error) => {
-    console.log("Google Login Failed", error);
-  };
-  // const handleSignInWithGoogle = async () => {
+  // const handleGoogleLoginSuccess = async (response) => {
   //   try {
-  //     // Call the backend server endpoint for Google Sign-In
-  //     // const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
-  //     const response = await fetch("https://dark-zipper-deer.cyclic.cloud/auth/google/callback", {
-  //       method: "GET",
-  //       mode: "cors",
-  //       credentials: "include",
+  //     // Send the Google ID token to your backend for verification and user creation/login
+  //     const idToken = response?.tokenId; // Get the Google ID token from the response
+  //     const response = await fetch("https://dark-zipper-deer.cyclic.cloud/auth/google/callbackL", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ idToken }),
   //     });
-  //       console.log(response.url,"clg")
+
   //     if (response.ok) {
-  //       // Redirect to the Google Sign-In page
-  //       window.location.href = response.url;
-  //       console.log(response,"res")
+  //       const data = await response.json();
+  //       const token = data.token;
+  //       const userId = data.userId;
+  //       if (token && userId) {
+  //         localStorage.setItem("token", token);
+  //         localStorage.setItem("userId", userId);
+  //         router.push("/");
+  //       }
   //     } else {
   //       console.log("Error occurred during Google Sign-In");
   //     }
@@ -89,9 +64,30 @@ const LoginInput = () => {
   //     console.log(error);
   //   }
   // };
+  const handleSignInWithGoogle = async () => {
+    try {
+      // Call the backend server endpoint for Google Sign-In
+      // const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app/auth/google/callback", {
+      const response = await fetch("https://dark-zipper-deer.cyclic.cloud/auth/google/callback", {
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+      });
+        console.log(response.url,"clg")
+      if (response.ok) {
+        // Redirect to the Google Sign-In page
+        window.location.href = response.url;
+        console.log(response,"res")
+      } else {
+        console.log("Error occurred during Google Sign-In");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
-      {/* <form onSubmit={handleSubmitForm}>
+      <form onSubmit={handleSubmitForm}>
         <label className="block mb-2">Email</label>
         <input
           type="email"
@@ -118,20 +114,13 @@ const LoginInput = () => {
           />
         </div>
       
-      </form> */}
-      {/* <button
+      </form>
+      <button
           onClick={handleSignInWithGoogle}
           className="bg-blue-600 px-8 py-2 mt-4 cursor-pointer"
         >
           Sign In with Google
-        </button> */}
-         <GoogleLogin
-        clientId="YOUR_GOOGLE_CLIENT_ID"
-        buttonText="Sign In with Google"
-        onSuccess={handleGoogleLoginSuccess}
-        onFailure={handleGoogleLoginFailure}
-        cookiePolicy={"single_host_origin"}
-      />
+        </button>
     </div>
   );
 };

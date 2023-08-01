@@ -58,6 +58,7 @@ export type Mutation = {
   addToCart?: Maybe<CartItem>;
   createTodo?: Maybe<Todo>;
   loginUser: LoginResponse;
+  loginUserWithGoogle: LoginResponse;
   signUpUser: User;
 };
 
@@ -75,8 +76,12 @@ export type MutationCreateTodoArgs = {
 
 export type MutationLoginUserArgs = {
   email?: InputMaybe<Scalars['String']['input']>;
-  googleAuthCode?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationLoginUserWithGoogleArgs = {
+  googleAuthCode: Scalars['String']['input'];
 };
 
 
@@ -171,10 +176,16 @@ export type CreateTodoMutationVariables = Exact<{
 
 export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id?: string | null, title?: string | null, price?: string | null, description?: string | null } | null };
 
+export type LoginUserWithGoogleMutationVariables = Exact<{
+  googleAuthCode: Scalars['String']['input'];
+}>;
+
+
+export type LoginUserWithGoogleMutation = { __typename?: 'Mutation', loginUserWithGoogle: { __typename?: 'LoginResponse', userId?: string | null, token?: string | null, message?: string | null } };
+
 export type LoginUserMutationVariables = Exact<{
   email?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
-  googleAuthCode?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -270,9 +281,27 @@ export const useCreateTodoMutation = <
       (variables?: CreateTodoMutationVariables) => fetcher<CreateTodoMutation, CreateTodoMutationVariables>(CreateTodoDocument, variables)(),
       options
     );
+export const LoginUserWithGoogleDocument = `
+    mutation LoginUserWithGoogle($googleAuthCode: String!) {
+  loginUserWithGoogle(googleAuthCode: $googleAuthCode) {
+    userId
+    token
+    message
+  }
+}
+    `;
+export const useLoginUserWithGoogleMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<LoginUserWithGoogleMutation, TError, LoginUserWithGoogleMutationVariables, TContext>) =>
+    useMutation<LoginUserWithGoogleMutation, TError, LoginUserWithGoogleMutationVariables, TContext>(
+      ['LoginUserWithGoogle'],
+      (variables?: LoginUserWithGoogleMutationVariables) => fetcher<LoginUserWithGoogleMutation, LoginUserWithGoogleMutationVariables>(LoginUserWithGoogleDocument, variables)(),
+      options
+    );
 export const LoginUserDocument = `
-    mutation LoginUser($email: String, $password: String, $googleAuthCode: String) {
-  loginUser(email: $email, password: $password, googleAuthCode: $googleAuthCode) {
+    mutation LoginUser($email: String, $password: String) {
+  loginUser(email: $email, password: $password) {
     userId
     token
     message

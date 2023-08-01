@@ -17,6 +17,15 @@ declare module '*/createTodo.mutation.gql' {
 }
     
 
+declare module '*/loginGoogle.mutation.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const LoginUserWithGoogle: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/loginUser.mutation.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
