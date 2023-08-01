@@ -40,7 +40,7 @@ const LoginInput = () => {
   const handleSignInWithGoogle = async () => {
     try {
       // Call the backend server endpoint for Google Sign-In
-      const response = await fetch("https://scintillating-cucurucho-8944ab.netlify.app/auth/google/callback", {
+      const response = await fetch("https://prismatic-sunshine-ec4f13.netlify.app//auth/google/callback", {
         method: "GET",
         mode: "cors",
         credentials: "include",
