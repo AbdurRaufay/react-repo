@@ -34,7 +34,6 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Upload: { input: any; output: any; }
 };
 
 export type CartItem = {
@@ -59,7 +58,7 @@ export type Mutation = {
   addToCart?: Maybe<CartItem>;
   createTodo?: Maybe<Todo>;
   loginUser: LoginResponse;
-  signUpUser?: Maybe<User>;
+  signUpUser: User;
 };
 
 
@@ -76,6 +75,7 @@ export type MutationCreateTodoArgs = {
 
 export type MutationLoginUserArgs = {
   email?: InputMaybe<Scalars['String']['input']>;
+  googleAuthCode?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -122,14 +122,12 @@ export type Todo = {
   __typename?: 'Todo';
   description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  imageUrl?: Maybe<Scalars['String']['output']>;
   price?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
 export type TodoCreate = {
   description?: InputMaybe<Scalars['String']['input']>;
-  image?: InputMaybe<Scalars['Upload']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -155,7 +153,7 @@ export type UserInput = {
 
 export type UserLoginInput = {
   email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+  password?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AddToCartMutationVariables = Exact<{
@@ -171,11 +169,12 @@ export type CreateTodoMutationVariables = Exact<{
 }>;
 
 
-export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id?: string | null, title?: string | null, price?: string | null, description?: string | null, imageUrl?: string | null } | null };
+export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id?: string | null, title?: string | null, price?: string | null, description?: string | null } | null };
 
 export type LoginUserMutationVariables = Exact<{
   email?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
+  googleAuthCode?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -190,7 +189,7 @@ export type SignUpUserMutationVariables = Exact<{
 }>;
 
 
-export type SignUpUserMutation = { __typename?: 'Mutation', signUpUser?: { __typename?: 'User', _id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, password?: string | null, role?: string | null, message?: string | null } | null };
+export type SignUpUserMutation = { __typename?: 'Mutation', signUpUser: { __typename?: 'User', _id?: string | null, firstName?: string | null, lastName?: string | null, email?: string | null, password?: string | null, role?: string | null, message?: string | null } };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -259,7 +258,6 @@ export const CreateTodoDocument = `
     title
     price
     description
-    imageUrl
   }
 }
     `;
@@ -273,8 +271,8 @@ export const useCreateTodoMutation = <
       options
     );
 export const LoginUserDocument = `
-    mutation LoginUser($email: String, $password: String) {
-  loginUser(email: $email, password: $password) {
+    mutation LoginUser($email: String, $password: String, $googleAuthCode: String) {
+  loginUser(email: $email, password: $password, googleAuthCode: $googleAuthCode) {
     userId
     token
     message
