@@ -86,13 +86,14 @@ const LoginInput = () => {
             className="bg-green-600 px-8 py-2 cursor-pointer"
           />
         </div>
-        <button
+      
+      </form>
+      <button
           onClick={handleSignInWithGoogle}
           className="bg-blue-600 px-8 py-2 mt-4 cursor-pointer"
         >
           Sign In with Google
         </button>
-      </form>
     </div>
   );
 };
