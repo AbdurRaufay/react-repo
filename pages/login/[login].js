@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 const generateGoogleAuthUrl = () => {
   return (
     "https://accounts.google.com/o/oauth2/v2/auth" +
-    "?client_id=YOUR_GOOGLE_CLIENT_ID" +
-    "&redirect_uri=YOUR_REDIRECT_URI" +
+    "?client_id=670797767305-idd2c6ja8v8qcko6ke46r3qjtbcoo09u.apps.googleusercontent.com" +
+    "&redirect_uri=https://dark-zipper-deer.cyclic.cloud/auth/google/callback" +
     "&response_type=code" +
     "&scope=https://www.googleapis.com/auth/userinfo.email" +
     "&access_type=offline" +
@@ -51,6 +51,7 @@ const LoginInput = () => {
       console.log(error);
     }
   };
+
   const handleSignInWithGoogle = async () => {
     const googleAuthUrl = generateGoogleAuthUrl();
     try {
@@ -91,43 +92,6 @@ const LoginInput = () => {
       console.log(error);
     }
   };
-  
-  // const handleSignInWithGoogle = async () => {
-  //   const googleAuthUrl = generateGoogleAuthUrl();
-  //   try {
-  //     const width = 500;
-  //     const height = 600;
-  //     const left = window.screen.width / 2 - width / 2;
-  //     const top = window.screen.height / 2 - height / 2;
-  //     const googleAuthWindow = window.open(
-  //       googleAuthUrl,
-  //       "GoogleAuthWindow",
-  //       `width=${width},height=${height},top=${top},left=${left}`
-  //     );
-  
-  //     window.addEventListener("message", async (event) => {
-  //       if (event.source === googleAuthWindow && event.data?.accessToken) {
-  //         const accessToken = event.data.accessToken;
-  //       console.log(accessToken,"ACCESSTOKEN")
-  //         try {
-  //           const response = await loginMutate(accessToken);
-  //           const token = response?.data?.loginUserWithGoogle?.token;
-  //           const userId = response?.data?.loginUserWithGoogle?.userId;
-  //           console.log(userId,"user")
-  //           if (token && userId) {
-  //             localStorage.setItem("token", token);
-  //             localStorage.setItem("userId", userId);
-  //             router.push("/");
-  //           }
-  //         } catch (error) {
-  //           console.log(error);
-  //         }
-  //       }
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <div>
