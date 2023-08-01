@@ -18,7 +18,7 @@ const generateGoogleAuthUrl = () => {
 const LoginInput = () => {
     const router=useRouter()
   const { mutateAsync, loading } = useLoginUserMutation();
-  const {loginMutate}=useLoginUserWithGoogleMutation()
+  const {mutateAsync:loginMutate}=useLoginUserWithGoogleMutation()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
