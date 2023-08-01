@@ -67,12 +67,12 @@ const LoginInput = () => {
       window.addEventListener("message", async (event) => {
         if (event.source === googleAuthWindow && event.data?.accessToken) {
           const accessToken = event.data.accessToken;
-        console.log(accessToken,"ACCESSTOKEN")
+          console.log(accessToken, "ACCESSTOKEN");
           try {
             const response = await loginMutate(accessToken);
             const token = response?.data?.loginUserWithGoogle?.token;
             const userId = response?.data?.loginUserWithGoogle?.userId;
-            console.log(userId,"user")
+            console.log(userId, "user");
             if (token && userId) {
               localStorage.setItem("token", token);
               localStorage.setItem("userId", userId);
@@ -81,12 +81,53 @@ const LoginInput = () => {
           } catch (error) {
             console.log(error);
           }
+          // Post message back to parent window
+          window.opener.postMessage({ accessToken: event.data.accessToken }, '*');
+          // Close the popup window after sending the message
+          googleAuthWindow.close();
         }
       });
     } catch (error) {
       console.log(error);
     }
   };
+  
+  // const handleSignInWithGoogle = async () => {
+  //   const googleAuthUrl = generateGoogleAuthUrl();
+  //   try {
+  //     const width = 500;
+  //     const height = 600;
+  //     const left = window.screen.width / 2 - width / 2;
+  //     const top = window.screen.height / 2 - height / 2;
+  //     const googleAuthWindow = window.open(
+  //       googleAuthUrl,
+  //       "GoogleAuthWindow",
+  //       `width=${width},height=${height},top=${top},left=${left}`
+  //     );
+  
+  //     window.addEventListener("message", async (event) => {
+  //       if (event.source === googleAuthWindow && event.data?.accessToken) {
+  //         const accessToken = event.data.accessToken;
+  //       console.log(accessToken,"ACCESSTOKEN")
+  //         try {
+  //           const response = await loginMutate(accessToken);
+  //           const token = response?.data?.loginUserWithGoogle?.token;
+  //           const userId = response?.data?.loginUserWithGoogle?.userId;
+  //           console.log(userId,"user")
+  //           if (token && userId) {
+  //             localStorage.setItem("token", token);
+  //             localStorage.setItem("userId", userId);
+  //             router.push("/");
+  //           }
+  //         } catch (error) {
+  //           console.log(error);
+  //         }
+  //       }
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
