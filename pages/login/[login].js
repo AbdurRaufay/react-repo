@@ -8,7 +8,7 @@ const generateGoogleAuthUrl = () => {
   const clientid=process.env.clientId
   return (
     "https://accounts.google.com/o/oauth2/v2/auth" +
-    "?client_id=670797767305-idd2c6ja8v8qcko6ke46r3qjtbcoo09u.apps.googleusercontent.com"+
+    "?client_id=780697357868-n7t10ueblj0n89vfpksqnp4lrhc3718e.apps.googleusercontent.com"+
     "&redirect_uri=https://dark-zipper-deer.cyclic.cloud/auth/google/callback" +
     "&response_type=code" +
     "&scope=https://www.googleapis.com/auth/userinfo.email" +
